@@ -4,6 +4,8 @@
 
 A simple extension to install nuget packages through the command palette.
 
+Based off and inspired by https://github.com/jmrog/vscode-nuget-package-manager
+
 ## Requirements
 
 Only works on .NET 6 and onwards.
