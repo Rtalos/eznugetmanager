@@ -1,0 +1,87 @@
+{
+  "name": "eznugetmanager",
+  "displayName": "EzNugetManager",
+  "description": "A command palette based nuget manager for dotnet",
+  "version": "0.0.1",
+  "private": "true",
+  "engines": {
+    "vscode": "^1.84.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "eznugetmanager.addNugetPackage",
+        "title": "EzNugetManager: Add Nuget Package"
+      },
+      {
+        "command": "eznugetmanager.removeNugetPackage",
+        "title": "EzNugetManager: Remove Nuget Package"
+      }
+    ],
+    "configuration": {
+      "title": "ezNuget",
+      "properties": {
+        "ezNuget.azure.feeds": {
+          "type": "array",
+          "default": [],
+          "description": "Azure DevOps feeds to use for fetching packages",
+          "items": {
+            "type": "object",
+            "title": "Feed",
+            "properties": {
+              "ezNuget.azure.feeds.name": {
+                "type": "string",
+                "description": "Name of the feed"
+              },
+              "ezNuget.azure.feeds.org": {
+                "type": "string",
+                "description": "Organization name in Azure DevOps"
+              },
+              "ezNuget.azure.feeds.project": {
+                "type": "string",
+                "description": "Project name in Azure DevOps"
+              },
+              "ezNuget.azure.feeds.pat": {
+                "type": "string",
+                "description": "Personal access token to use for fetching packages"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run esbuild-base --minify",
+    "esbuild-base": "esbuild ./src/extension.ts --bundle --outfile=out/extension.js --external:vscode --format=cjs --platform=node",
+    "build": "npm run esbuild-base -- --sourcemap",
+    "watch": "npm run esbuild-base -- --sourcemap --watch",
+    "lint": "eslint src --ext ts",
+    "test": "node ./out/test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/mocha": "^10.0.3",
+    "@types/node": "18.x",
+    "@types/node-fetch": "^2.6.9",
+    "@types/vscode": "^1.84.0",
+    "@types/xml2js": "^0.4.14",
+    "@typescript-eslint/eslint-plugin": "^6.9.0",
+    "@typescript-eslint/parser": "^6.9.0",
+    "@vscode/test-electron": "^2.3.6",
+    "esbuild": "^0.19.8",
+    "eslint": "^8.52.0",
+    "glob": "^10.3.10",
+    "mocha": "^10.2.0",
+    "typescript": "^5.2.2"
+  },
+  "dependencies": {
+    "https-proxy-agent": "^7.0.2",
+    "node-fetch": "^2.7.0",
+    "xml2js": "^0.6.2"
+  }
+}
